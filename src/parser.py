@@ -43,3 +43,4 @@ class Parser():
         for token in tokens:
             stmt = _get_statement(token)
             statements.append(stmt)
+        return statements
