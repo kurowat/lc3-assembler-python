@@ -40,10 +40,9 @@ def _tokenize_line(line: str, line_no: int):
         if c == '"':
             beg=i
             i+=1
-            while i < n and line[i] != '"':
-                i+=1
-            token_list.append(Token(STRING,line[beg:i],line_no))
-            i+=1
+            while i < n and line[i] != '"': i+=1
+            token_list.append(Token(STRING,line[beg:i+1],line_no))
+            i+=2
             continue
 
         if c.isalnum() or c == '_':
