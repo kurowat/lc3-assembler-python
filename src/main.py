@@ -1,10 +1,6 @@
-from lexer import Lexer
-from parser import Parser
-from encoder import Encoder
-from symbol_table import build_symbol_table
 from common import bcolors
-import struct
-import itertools
+from lc3asm import assemble
+from helper import write_sym_table, write_bytes
 import os.path
 import sys
 
@@ -18,24 +14,10 @@ if not os.path.isfile(source):
     print(bcolors.FAIL + 'fetal error: ' + bcolors.ENDC + f'file \'{source}\' does not exist')
     sys.exit(1)
 
-lexer = Lexer()
-parser = Parser()
-encoder = Encoder()
-
-tokens = lexer.tokenize(source)
-statements = parser.parse(tokens)
-sym_table = build_symbol_table(statements)
-insts = encoder.encode(statements, sym_table)
-
+insts, sym_table = assemble(source)
 filename = os.path.splitext(os.path.basename(source))[0]
 out_sym = filename + '.sym'
 out_obj = filename + '.obj'
 
-if len(sym_table) > 0:
-    with open(out_sym, 'w') as f:
-        for label in sym_table:
-            f.write(f'{sym_table[label]} {label}\n')
-
-with open(out_obj, 'wb') as f:
-    for inst in insts:
-        f.write(struct.pack('>H', int(inst, 16)))
+if len(sym_table) > 0: write_sym_table(out_sym, sym_table)
+write_bytes(out_obj, insts)
