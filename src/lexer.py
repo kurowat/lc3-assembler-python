@@ -18,9 +18,6 @@ def _tokenize_line(line: str, line_no: int):
             break
         if c in ' ,\t':
             i+=1
-        # if c == ',':
-        #     token_list.append(Token(COMMA,',',line_no))
-        #     i+=1
         if c == '.':
             beg=i
             i+=1
@@ -69,5 +66,3 @@ class Lexer():
                 tokens.append(_tokenize_line(line.strip(),line_no))
                 line_no+=1
         return list(filter(None,tokens))
-
-

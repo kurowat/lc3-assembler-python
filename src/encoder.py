@@ -56,7 +56,6 @@ def _get_value(opd, stmt, sym_table):
 class Encoder():
     def encode(self, stmts, sym_table):
         words = []
-
         for stmt in stmts:
             if stmt.op == None: continue
             if stmt.op == '.END': break
@@ -89,12 +88,9 @@ class Encoder():
                 if 'N' in stmt.op: word|=(1 << 11)
             elif stmt.op == 'BR':
                 word|=(1 << 9)|(1 << 10)|(1 << 11)
-
             base, fields = LAYOUTS[(ops,_get_layout(stmt.operands))]
             for opd, (shift, bits) in zip(stmt.operands,fields):
-                # print(f'Operand: {opd}, Shift: {shift}, Bits: {bits}')
                 value=_get_value(opd,stmt,sym_table)
                 word|=(value & ((1 << bits) - 1)) << shift
-            # print(f'OPCODE: {stmt.op:<5} -> | {(base|word):016b} | 0x{(base|word):04X}\n')
             words.append(f"0x{(base|word):04X}")
         return words

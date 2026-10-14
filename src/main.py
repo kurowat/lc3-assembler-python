@@ -24,16 +24,7 @@ encoder = Encoder()
 tokens = lexer.tokenize(source)
 statements = parser.parse(tokens)
 sym_table = build_symbol_table(statements)
-
-# for sym in sym_table:
-#     print(sym_table[sym], sym)
-#
-# for stmt in statements:
-#     print(stmt)
-
 insts = encoder.encode(statements, sym_table)
-
-print(insts)
 
 filename = os.path.splitext(os.path.basename(source))[0]
 out_sym = filename + '.sym'
@@ -47,7 +38,3 @@ if len(sym_table) > 0:
 with open(out_obj, 'wb') as f:
     for inst in insts:
         f.write(struct.pack('>H', int(inst, 16)))
-
-# source -> lexer -> parser     -> encoder -> write_out
-#                 -> sym_table  
-
