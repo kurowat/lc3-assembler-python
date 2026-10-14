@@ -9,12 +9,13 @@ import os.path
 import sys
 
 if len(sys.argv) != 2:
-    print(bcolors.FAIL + 'error: invalid command' + bcolors.ENDC)
+    print(bcolors.FAIL + 'fetal error: ' + bcolors.ENDC + 'missing required argument <file>')
+    print('Usage: lc3-asm <file>')
     sys.exit(1)
 
 source = sys.argv[1]
 if not os.path.isfile(source):
-    print(bcolors.FAIL + 'error: file doesn\'t exist' + bcolors.ENDC)
+    print(bcolors.FAIL + 'fetal error: ' + bcolors.ENDC + f'file \'{source}\' does not exist')
     sys.exit(1)
 
 lexer = Lexer()
