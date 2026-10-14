@@ -50,7 +50,7 @@ def _get_reg_value(reg : str):
 
 def _get_value(opd, stmt, sym_table):
     if opd.type == TokenType.REGISTER: return _get_reg_value(opd.value)
-    if opd.type == TokenType.NUMBER:   return int(opd.value[1:])
+    if opd.type == TokenType.NUMBER:   return int(opd.value[1:]) if not 'x' in opd.value else int(opd.value,16) if opd.value[0:2] == '0x' else int(('0'+opd.value),16)
     if opd.type == TokenType.IDENT:    return (int(sym_table[opd.value],16) - (int(stmt.address,16)+1))   
 
 class Encoder():
