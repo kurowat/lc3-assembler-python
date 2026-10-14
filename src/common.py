@@ -86,6 +86,7 @@ SPEC = {
     ".BLKW"    : [(NUM,)],
     ".STRINGZ" : [(STR,)],
     ".END"     : [()],
+    "NOP"      : [()],
 }
 
 DIRECTIVES = {
@@ -127,4 +128,5 @@ OPCODES = {
     "PUTS",
     "IN",
     "PUTSP",
+    "NOP",
 }

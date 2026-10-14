@@ -26,6 +26,7 @@ LAYOUTS = {
     ("IN",       "")    : (0xf023,[()]),
     ("PUTSP",    "")    : (0xf024,[()]),
     ("HALT",     "")    : (0xf025,[()]),
+    ("NOP",      "")    : (0x0000,[()]),
 }
 
 def _get_layout(operands : list):
