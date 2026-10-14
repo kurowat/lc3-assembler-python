@@ -83,12 +83,12 @@ class Encoder():
             ops=stmt.op
             if len(stmt.op) > 2 and stmt.op[0:2] == 'BR':
                 ops=stmt.op[0:2]
-                if 'P' in stmt.op:
-                    word|=(1 << 9)
-                if 'Z' in stmt.op:
-                    word|=(1 << 10)
-                if 'N' in stmt.op:
-                    word|=(1 << 11)
+                if 'P' in stmt.op: word|=(1 << 9)
+                if 'Z' in stmt.op: word|=(1 << 10)
+                if 'N' in stmt.op: word|=(1 << 11)
+            elif stmt.op == 'BR':
+                word|=(1 << 9)|(1 << 10)|(1 << 11)
+
             base, fields = LAYOUTS[(ops,_get_layout(stmt.operands))]
             for opd, (shift, bits) in zip(stmt.operands,fields):
                 # print(f'Operand: {opd}, Shift: {shift}, Bits: {bits}')
