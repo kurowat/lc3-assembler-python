@@ -93,7 +93,7 @@ class Encoder():
             for opd, (shift, bits) in zip(stmt.operands,fields):
                 # print(f'Operand: {opd}, Shift: {shift}, Bits: {bits}')
                 value=_get_value(opd,stmt,sym_table)
-                word|=(value & bits) << shift
+                word|=(value & ((1 << bits) - 1)) << shift
             # print(f'OPCODE: {stmt.op:<5} -> | {(base|word):016b} | 0x{(base|word):04X}\n')
             words.append(f"0x{(base|word):04X}")
         return words
