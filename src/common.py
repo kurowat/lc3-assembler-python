@@ -4,7 +4,6 @@ from enum import Enum, auto
 class TokenType(Enum):
     DIRECTIVE=auto()
     STRING=auto()
-    COMMA=auto()
     NUMBER=auto()
     REGISTER=auto()
     OPCODE=auto()
@@ -29,7 +28,6 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-
 @dataclass
 class Token:
     type  : TokenType
@@ -43,6 +41,13 @@ class Statement:
     operands : list = field(default_factory=list)
     line     : int = 0
     address  : int | None = None
+
+@dataclass
+class ErrorCtx:
+    msg : str = None
+    token : str = None
+    token_len : int = 0
+    line : int = 0
 
 REG=Operand.REG
 IMM5=Operand.IMM5

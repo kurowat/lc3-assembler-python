@@ -1,4 +1,6 @@
 def build_symbol_table(stmts: list):
+    if len(stmts) == 0: return {}
+
     LC=None
     n = len(stmts)
     i = 1
