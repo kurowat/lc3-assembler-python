@@ -21,3 +21,14 @@ After you compiled the assembly file, you'll get two files:
 
 You can run the simulation on website: [LC-3 Simulator](https://wchargin.com/lc3web/)
 
+## Error cases
+
+| ERROR | Example |
+| --- | --- |
+| Invalid character | $#@ etc. |
+| Malformed number | x3G / #2f |
+| Unterminated string in .STRINGZ | .STRINGZ "abc |
+| Wrong operand count | NOT R1, R2, R3 |
+| Wrong operand type | `ADD R1, 2, R3 |
+| Missing .ORIG | NOT R1, R2<br>.END |
+| Missing .END | .ORIG x3000<br>ADD R1,R1,R2<br> |
